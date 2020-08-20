@@ -24,7 +24,7 @@ You can manually run each cell in <code>main.ipynb</code>
 
 ## 4. How it works   
 ### 4.1 Algorithm   
-```
+```python
         while True:   
             try:
                     tou = ser1.readline()       #    Touch Sensor
