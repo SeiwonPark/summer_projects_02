@@ -3,7 +3,7 @@ Multiple Functions with Arduino and Raspberry Pi
 
 **ABSTRACT**
 
-This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 ~ 2020.08.13). In this project, I implemented Multiple Functions(Serial Communication, Sensing and Actuating) between Arduino and Raspberry Pi using Python, C/C++ to automate the circuit and to communicate. And in this process, I tried to control sensors and actuator with only Raspberry Pi. But what I've realized was that Raspberry Pi can't directly control Arduino's actuator but only can receive Serial values. So I regarded Raspberry Pi as an Actuator, and Arduino as a Sensor. The method that was implemented in this project was giving certain values that I set(like 999, 119 or 112) and take those values at a certain condition so that I can divide cases from which sensors gave me that values.
+This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 ~ 2020.08.13). In this project, I implemented Multiple Functions(Serial Communication, Sensing and Actuating) between Arduino and Raspberry Pi using Python, C/C++ to automate the circuit and to communicate. And in this process, I tried to control sensors and actuator with only Raspberry Pi. But what I've realized was that Raspberry Pi can't directly control Arduino's actuator but only can receive Serial values. So I regarded Raspberry Pi as an Actuator, and Arduino as a Sensor. The method that was implemented in this project was giving certain values that I set(like 999, 119 or 112) and take those values at a certain condition so that I can divide cases from which sensors gave Raspbery Pi that values.
 
 
 
@@ -30,18 +30,21 @@ You can manually run each cell in <code>main.ipynb</code>
                     tou = ser1.readline()       #    Touch Sensor
                     pas = ser2.readline()       #    Password
                     vib = ser3.readline()       #    Vibration Sensor
+                    
+                    touch = True                #    if Touch Sensor is on, initialized with True
 
-                    if int(tou[0]) == 57 and int(vib[0]) == 57:
-                        print(999)
+                    if int(tou[0]) == 57 and int(vib[0]) == 57:  #  57 is the value that I set in Arduino 
+                                                                 #  which means 'normal'
+                        print(999)           #    999 is 'normal' value that I set in Raspberry Pi
 
-                    if pas[0] == 0:          #    999는 베이스
+                    if pas[0] == 0:          
                         print(999)
                     else:
                         print(int(pas[0]) - 48)
 
-                    # 진동 센서가 감지 되거나, 터치 센서가 감지 되거나, 화재경보 센서가 감지 됐을 경우
+                    # When each sensors sensed
                     if touch:
-                        if int(tou[0]) == 49 or int(vib[0]) == 49:   # 부저는 자동으로 울림
+                        if int(tou[0]) == 49 or int(vib[0]) == 49:   # buzzer actuates automatically
                             print("        Problem Occurred !!!")
                             for i in range(8):
                                 buzzer.ChangeFrequency(scale[beep[i]])
@@ -51,22 +54,22 @@ You can manually run each cell in <code>main.ipynb</code>
                         print("        Fire Occurred !!!")
                         break
 
-                    # 비밀번호 입력        
+                    # Enter password        
                     if pas[0] != 0:
 
                         num = int(pas[0]) - 48
 
-                        if int(pas[0]) == 42:              #    '*' 입력을 받았을 경우 입력 종료
+                        if int(pas[0]) == 42:                  #    when received '*', terminate input
                             buzzer.ChangeFrequency(scale[10])
-                            if password == test:             #    비밀번호 성공
+                            if password == test:               #    password succeeded
                                 touch = False
                                 print("        The Safe Is Opened")
                                 for i in range(4):
                                     buzzer.ChangeFrequency(scale[dingdong[i]])
                                     time.sleep(0.5)
-                                servo.ChangeDutyCycle(7.5)     #    서보모터 90도 회전
+                                servo.ChangeDutyCycle(7.5)     #    servo rotates by 90 degree
 
-                            else:                              #    비밀번호 실패
+                            else:                              #    password failed
                                 print("        Wrong !!!")
                                 for i in range(3):
                                     buzzer.ChangeFrequency(scale[error[i]])
@@ -77,7 +80,7 @@ You can manually run each cell in <code>main.ipynb</code>
                             buzzer.ChangeFrequency(scale[num])
                             print("Num {} has been pressed".format(num))
                             test.append(num)
-                        elif int(pas[0]) == 35:           #    '#' 입력을 받았을 경우
+                        elif int(pas[0]) == 35:                #   when received '#', delete last input
                             buzzer.ChangeFrequency(scale[11])
                             del test[-1]
 
