@@ -32,7 +32,7 @@ You can manually run each cell in <code>main.ipynb</code>
                     pas = ser2.readline()       #    Password Button
                     vib = ser3.readline()       #    Vibration Sensor
                     
-                    touch = True                #    if Touch Sensor is on, initialized with True
+                    touch = True                #    if Touch Sensor is on, initialize it by True
 
                     if int(tou[0]) == 57 and int(vib[0]) == 57:  #  57 is the value that I set in Arduino 
                                                                  #  which means 'normal'
@@ -45,7 +45,9 @@ You can manually run each cell in <code>main.ipynb</code>
 
                     # When each sensors sensed
                     if touch:
-                        if int(tou[0]) == 49 or int(vib[0]) == 49:   # buzzer actuates automatically
+                        if int(tou[0]) == 49 or int(vib[0]) == 49:    # 49 is the value that I set in Arduino
+                                                                      # which means 'problem occured'
+                                                                      # regardless of the value, buzzer actuates automatically
                             print("        Problem Occurred !!!")
                             for i in range(8):
                                 buzzer.ChangeFrequency(scale[beep[i]])
