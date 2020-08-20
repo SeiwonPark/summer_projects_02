@@ -24,11 +24,12 @@ You can manually run each cell in <code>main.ipynb</code>
 
 ## 4. How it works   
 ### 4.1 Algorithm   
+#### 4.1.1 Overall Algorithm   
 ```python
         while True:   
             try:
                     tou = ser1.readline()       #    Touch Sensor
-                    pas = ser2.readline()       #    Password
+                    pas = ser2.readline()       #    Password Button
                     vib = ser3.readline()       #    Vibration Sensor
                     
                     touch = True                #    if Touch Sensor is on, initialized with True
@@ -88,6 +89,7 @@ You can manually run each cell in <code>main.ipynb</code>
                         break
 ```
 
+#### 4.1.2 Algorithm for makeSound(start, soundList, sleepTime)
 
 
 
