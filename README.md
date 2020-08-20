@@ -24,67 +24,69 @@ You can manually run each cell in <code>main.ipynb</code>
 
 ## 4. How it works   
 ### 4.1 Algorithm   
-<code>
-            while True:
-    try:
-        tou = ser1.readline()       #    터치센서
-        vib = ser3.readline()       #    진동감지
-        pas = ser2.readline()       #    비밀번호
+```
+        while True:   
+            try:
+                    tou = ser1.readline()       #    Touch Sensor
+                    pas = ser2.readline()       #    Password
+                    vib = ser3.readline()       #    Vibration Sensor
+
+                    if int(tou[0]) == 57 and int(vib[0]) == 57:
+                        print(999)
+
+                    if pas[0] == 0:          #    999는 베이스
+                        print(999)
+                    else:
+                        print(int(pas[0]) - 48)
+
+                    # 진동 센서가 감지 되거나, 터치 센서가 감지 되거나, 화재경보 센서가 감지 됐을 경우
+                    if touch:
+                        if int(tou[0]) == 49 or int(vib[0]) == 49:   # 부저는 자동으로 울림
+                            print("        Problem Occurred !!!")
+                            for i in range(8):
+                                buzzer.ChangeFrequency(scale[beep[i]])
+                                time.sleep(0.3)
+                            break
+                    if int(tou[1]) == 49 and int(tou[2]) == 57:
+                        print("        Fire Occurred !!!")
+                        break
+
+                    # 비밀번호 입력        
+                    if pas[0] != 0:
+
+                        num = int(pas[0]) - 48
+
+                        if int(pas[0]) == 42:              #    '*' 입력을 받았을 경우 입력 종료
+                            buzzer.ChangeFrequency(scale[10])
+                            if password == test:             #    비밀번호 성공
+                                touch = False
+                                print("        The Safe Is Opened")
+                                for i in range(4):
+                                    buzzer.ChangeFrequency(scale[dingdong[i]])
+                                    time.sleep(0.5)
+                                servo.ChangeDutyCycle(7.5)     #    서보모터 90도 회전
+
+                            else:                              #    비밀번호 실패
+                                print("        Wrong !!!")
+                                for i in range(3):
+                                    buzzer.ChangeFrequency(scale[error[i]])
+                                    time.sleep(0.5)
+                                break
+                        elif 0 <= num and num <= 9:
+                            num = int(pas[0]) - 48
+                            buzzer.ChangeFrequency(scale[num])
+                            print("Num {} has been pressed".format(num))
+                            test.append(num)
+                        elif int(pas[0]) == 35:           #    '#' 입력을 받았을 경우
+                            buzzer.ChangeFrequency(scale[11])
+                            del test[-1]
+
+            except KeyboardInterrupt:
+                        break
+```
 
 
-        if int(tou[0]) == 57 and int(vib[0]) == 57:
-            print(999)
 
-        if pas[0] == 0:          #    999는 베이스
-            print(999)
-        else:
-            print(int(pas[0]) - 48)
-
-        # 진동 센서가 감지 되거나, 터치 센서가 감지 되거나, 화재경보 센서가 감지 됐을 경우
-        if touch:
-            if int(tou[0]) == 49 or int(vib[0]) == 49:   # 부저는 자동으로 울림
-                print("        Problem Occurred !!!")
-                for i in range(8):
-                    buzzer.ChangeFrequency(scale[beep[i]])
-                    time.sleep(0.3)
-                break
-        if int(tou[1]) == 49 and int(tou[2]) == 57:
-            print("        Fire Occurred !!!")
-            break
-
-        # 비밀번호 입력        
-        if pas[0] != 0:
-
-            num = int(pas[0]) - 48
-
-            if int(pas[0]) == 42:              #    '*' 입력을 받았을 경우 입력 종료
-                buzzer.ChangeFrequency(scale[10])
-                if password == test:             #    비밀번호 성공
-                    touch = False
-                    print("        The Safe Is Opened")
-                    for i in range(4):
-                        buzzer.ChangeFrequency(scale[dingdong[i]])
-                        time.sleep(0.5)
-                    servo.ChangeDutyCycle(7.5)     #    서보모터 90도 회전
-
-                else:                              #    비밀번호 실패
-                    print("        Wrong !!!")
-                    for i in range(3):
-                        buzzer.ChangeFrequency(scale[error[i]])
-                        time.sleep(0.5)
-                    break
-            elif 0 <= num and num <= 9:
-                num = int(pas[0]) - 48
-                buzzer.ChangeFrequency(scale[num])
-                print("Num {} has been pressed".format(num))
-                test.append(num)
-            elif int(pas[0]) == 35:           #    '#' 입력을 받았을 경우
-                buzzer.ChangeFrequency(scale[11])
-                del test[-1]
-
-    except KeyboardInterrupt:
-        break
-</code>
 
 
         
