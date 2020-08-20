@@ -35,7 +35,7 @@ You can manually run each cell in <code>main.ipynb</code>
 
                     if int(tou[0]) == 57 and int(vib[0]) == 57:  #  57 is the value that I set in Arduino 
                                                                  #  which means 'normal'
-                        print(999)           #    999 is 'normal' value that I set in Raspberry Pi
+                        print(999)              #    999 is 'normal' value that I set in Raspberry Pi
 
                     if pas[0] == 0:          
                         print(999)
