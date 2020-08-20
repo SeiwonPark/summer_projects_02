@@ -7,15 +7,16 @@ This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 
 
 
 
-**1. Author**
+## 1. Author   
 * Name: 박세원(Seiwon Park)
 * Student ID: 20153178
 
-**2. Version and Connect**
+## 2. Version and Connect   
 * Version: Arduino 1.8.13, Raspberry Pi PL-App 1.0
-* Connect: <code>%%bash</code>   
+* Connect:   
+            <code>%%bash</code>   
             <code>ls /sys/bus/usb-serial/devices/ | sed "s/^/\/dev\//g"</code>                 
     
-**3. How to use**   
-**3.1 Run using Jupyter Notebook**   
+## 3. How to use   
+### 3.1 Run using Jupyter Notebook
 
