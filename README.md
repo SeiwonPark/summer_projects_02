@@ -18,7 +18,7 @@ This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 
     
 ## 3. How to use   
 ### 3.1 Run using <code>main.ipynb</code> in Jupyter Notebook by PL-App Launcher
-_Note_: You should make sure that Raspberry Pi is connected correctly and uses the same Wi-Fi with your computer
+_Note_: You should make sure that Raspberry Pi is connected correctly and use the same Wi-Fi with your computer   
 Or you can manually run each cell in <code>steps.ipynb</code>
 
 #### 3.1.1 Arduino serial communication test   
