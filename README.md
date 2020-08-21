@@ -3,8 +3,7 @@ Multiple Functions with Arduino and Raspberry Pi
 
 **ABSTRACT**
 
-This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 ~ 2020.08.13). In this project, I implemented Multiple Functions(Serial Communication, Sensing and Actuating) between Arduino and Raspberry Pi using Python, C/C++ to automate the circuit and to communicate. And in this process, I tried to control sensors and actuator with only Raspberry Pi. But what I've realized was that Raspberry Pi can't directly control Arduino's actuator but only can receive Serial values. So I regarded Raspberry Pi as an Actuator, and Arduino as a Sensor. The method that was implemented in this project was giving certain values that I set(like 999, 119 or 112) and take those values at a certain condition so that I can divide cases from which sensors gave Raspbery Pi that values.
-
+This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 ~ 2020.08.13). In this project, I implemented Multiple Functions(Serial Communication, Sensing and Actuating) between Arduino and Raspberry Pi using Python, C/C++ to automate the circuit and to communicate. And in this process, I tried to control sensors and actuators only by Raspberry Pi. But what I've realized was that Raspberry Pi can't directly control Arduino's actuator but only can receive Serial values. So I regarded Raspberry Pi as an Actuator, and Arduino as a Sensor. The method that was implemented in this project was giving certain values that I set(like 999, 119 or 112) and take those values at a certain condition so that I can divide cases from which sensors gave Raspbery Pi those values.
 
 
 ## 1. Author   
@@ -19,8 +18,18 @@ This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 
     
 ## 3. How to use   
 ### 3.1 Run using <code>main.ipynb</code> in Jupyter Notebook by PL-App Launcher
-_Note_: You should make sure that Raspberry Pi uses the same Wi-Fi with your computer   
-You can manually run each cell in <code>main.ipynb</code>   
+_Note_: You should make sure that Raspberry Pi is connected correctly and uses the same Wi-Fi with your computer
+You can manually run each cell in <code>main.ipynb</code>
+
+#### 3.1.1 Arduino serial communication test   
+You can run <code>SerialCommunication.ino</code> and test how Arduino communicates with Serial Monitor   
+The format of result of <code>SerialCommunication.ino</code> is as follows:   
+```c   
+            (analogInputPin) : (analogInputPinValue)   
+            (analogInputPin) : (analogInputPinValue)   
+            (analogInputPin) : (analogInputPinValue)   
+            ...   
+```
 
 ## 4. How it works   
 ### 4.1 Algorithm   
