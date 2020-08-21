@@ -96,7 +96,10 @@ Overall execution code is as follows:
                             break
                except KeyboardInterrupt:
                     break
-```
+```   
+Arduino gives Serial value to the connected Raspberry Pi, and Raspberry Pi takes that value with <code>serial.Serial('Connected USB Route', 9600).readline()</code>. As return type is string(<code>.readline()</code>), I tried to find out the first letter Arduino is giving to Raspberry Pi(Like 9, 1). But, as it is string type, the first letter would be  a byte type. So I needed to convert it into int type just for convenience. In this moment, the byte type converts into int type and this value follows ASCII. Finally I could divide cases 'Touched', 'Fire detected', 'Password entered', 'Vibration detected'.   
+   
+ 
 
 #### 4.1.2 Function <code>toASCII(serialRead)</code>   
 This function confirms 'normal state' of Arduino by receiving certain value that I set before   
@@ -108,8 +111,9 @@ And buzzer makes sounds by changing frequency
 #### 4.1.4 Function <code>rotateServo(num)</code>    
 This function makes servo rotate by certain degree by chaning duty cycle   
 
-
-
+## 5. Limitation   
+As time complexity is too high, when <code>main.ipynb</code> is implemented, it sometimes got _Time Out Error_   
+Though suspecting Raspberry Pi's performance, but I couldn't find out accurate reason why it fails when running   
 
 
 
