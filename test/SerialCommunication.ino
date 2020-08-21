@@ -1,4 +1,4 @@
-int analogInputPin = 0;
+int analogInputPin = 0;  // set on analogPin 0(A0)
 
 void setup() {
   // put your setup code here, to run once:
