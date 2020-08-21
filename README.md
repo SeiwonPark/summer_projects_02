@@ -19,7 +19,7 @@ This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 
 ## 3. How to use   
 ### 3.1 Run using <code>main.ipynb</code> in Jupyter Notebook by PL-App Launcher
 _Note_: You should make sure that Raspberry Pi is connected correctly and uses the same Wi-Fi with your computer
-You can manually run each cell in <code>main.ipynb</code>
+Or you can manually run each cell in <code>steps.ipynb</code>
 
 #### 3.1.1 Arduino serial communication test   
 You can run <code>SerialCommunication.ino</code> and test how Arduino communicates with Serial Monitor   
@@ -32,75 +32,84 @@ The format of result of <code>SerialCommunication.ino</code> is as follows:
 ```
 
 ## 4. How it works   
-### 4.1 Algorithm   
-#### 4.1.1 Overall Algorithm   
+### 4.1 Execution and Functions   
+#### 4.1.1 Overall Execution   
+Overall execution code is as follows:   
 ```python
-        while True:   
-            try:
-                    tou = ser1.readline()       #    Touch Sensor
-                    pas = ser2.readline()       #    Password Button
-                    vib = ser3.readline()       #    Vibration Sensor
-                    
-                    touch = True                #    if Touch Sensor is on, initialize it by True
+        while True:
+               try:
+                    while True:   
+                        try:
+                            tou = ser1.readline()       #    Touch Sensor
+                            pas = ser2.readline()       #    Password Button
+                            vib = ser3.readline()       #    Vibration Sensor
 
-                    if int(tou[0]) == 57 and int(vib[0]) == 57:  #  57 is the value that I set in Arduino 
-                                                                 #  which means 'normal'
-                        print(999)              #    999 is 'normal' value that I set in Raspberry Pi
+                            if toASCII(tou[0]) and toASCII(vib[0]):       #  57 is the value that I set in Arduino 
+                                                                          #  which means 'normal state'
+                                print(999)                                #  999 is 'normal state' value that I set in Raspberry Pi
 
-                    if pas[0] == 0:          
-                        print(999)
-                    else:
-                        print(int(pas[0]) - 48)
+                            if toASCII(pas[0]):
+                                print(999)
+                            else:
+                                print(int(pas[0]) - 48)
 
-                    # When each sensors sensed
-                    if touch:
-                        if int(tou[0]) == 49 or int(vib[0]) == 49:    # 49 is the value that I set in Arduino
-                                                                      # which means 'problem occured'
-                                                                      # regardless of the value, buzzer actuates automatically
-                            print("        Problem Occurred !!!")
-                            for i in range(8):
-                                buzzer.ChangeFrequency(scale[beep[i]])
-                                time.sleep(0.3)
-                            break
-                    if int(tou[1]) == 49 and int(tou[2]) == 57:
-                        print("        Fire Occurred !!!")
-                        break
-
-                    # Enter password        
-                    if pas[0] != 0:
-
-                        num = int(pas[0]) - 48
-
-                        if int(pas[0]) == 42:                  #    when received '*', terminate input
-                            buzzer.ChangeFrequency(scale[10])
-                            if password == test:               #    password succeeded
-                                touch = False
-                                print("        The Safe Is Opened")
-                                for i in range(4):
-                                    buzzer.ChangeFrequency(scale[dingdong[i]])
-                                    time.sleep(0.5)
-                                servo.ChangeDutyCycle(7.5)     #    servo rotates by 90 degree
-
-                            else:                              #    password failed
-                                print("        Wrong !!!")
-                                for i in range(3):
-                                    buzzer.ChangeFrequency(scale[error[i]])
-                                    time.sleep(0.5)
+                            if touch:
+                                if not toASCII(tou[0]) or not toASCII(vib[0]):  #  49 is the value that I set in Arduino
+                                                                                #  which means 'problem occured'
+                                                                                #  NOTE: regardless of the value, buzzer actuates automatically
+                                    print("        Problem Occurred !!!")
+                                    noteSound(beep)
+                                    break
+                            if not toASCII(tou[1]) and toASCII(tou[2]):
+                                print("        Fire Occurred !!!")
+                                noteSound(beep)
                                 break
-                        elif 0 <= num and num <= 9:
-                            num = int(pas[0]) - 48
-                            buzzer.ChangeFrequency(scale[num])
-                            print("Num {} has been pressed".format(num))
-                            test.append(num)
-                        elif int(pas[0]) == 35:                #   when received '#', delete last input
-                            buzzer.ChangeFrequency(scale[11])
-                            del test[-1]
 
-            except KeyboardInterrupt:
-                        break
+                            if pas[0] != 0:
+
+                                num = int(pas[0]) - 48
+
+                                if int(pas[0]) == 42:                           #  when received '*', terminate input
+                                    buttonSound(num)
+
+                                    if password == test:                        #  password succeeded
+                                        touch = False                           # inactivate Touch Sensor
+                                        print("        The Safe Is Opened")
+                                        noteSound(dingdong)
+                                        rotateServo(7.5)                        #  servo rotates by 90 degree
+                                    else:                                       #  password failed
+                                        print("        Wrong !!!")
+                                        noteSound(error)
+                                        break
+
+                                elif 0 <= num and num <= 9:
+                                    num = int(pas[0]) - 48
+                                    buttonSound(num)
+                                    print("Num {} has been pressed".format(num))
+                                    test.append(num)
+
+                                elif int(pas[0]) == 35:                         #  when received '#', delete last input
+                                    buttonSound(num)
+                                    del test[-1]
+
+                        except KeyboardInterrupt:
+                            break
+               except KeyboardInterrupt:
+                    break
 ```
 
-#### 4.1.2 Algorithm for makeSound(start, soundList, sleepTime)
+#### 4.1.2 Function <code>toASCII(serialRead)</code>   
+This function confirms 'normal state' of Arduino by receiving certain value that I set before   
+
+#### 4.1.3 Function <code>buttonSound(num)</code>, <code>noteSound(soundList)</code>   
+These functions make sounds using note list(which is <code>scale</code> in <code>main.ipynb</code>   
+And buzzer makes sounds by changing frequency   
+
+#### 4.1.4 Function <code>rotateServo(num)</code>    
+This function makes servo rotate by certain degree by chaning duty cycle   
+
+
+
 
 
 
