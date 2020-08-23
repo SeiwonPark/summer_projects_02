@@ -32,8 +32,12 @@ The format of result of <code>SerialCommunication.ino</code> is as follows:
 ```
 
 ## 4. How it works   
-### 4.1 Execution and Functions   
-#### 4.1.1 Overall Execution   
+### 4.1 Limitation   
+As time complexity is too high, when <code>main.ipynb</code> is implemented, it sometimes got _Time Out Error_   
+Though suspecting Raspberry Pi's performance, but I couldn't find out accurate reason why it fails when running   
+
+### 4.2 Execution and Functions   
+#### 4.2.1 Overall Execution   
 Overall execution code is as follows:   
 ```python
         while True:
@@ -101,19 +105,15 @@ Arduino gives Serial value to the connected Raspberry Pi, and Raspberry Pi takes
    
  
 
-#### 4.1.2 Function <code>toASCII(serialRead)</code>   
+#### 4.2.2 Function <code>toASCII(serialRead)</code>   
 This function confirms 'normal state' of Arduino by receiving certain value that I set before   
 
-#### 4.1.3 Function <code>buttonSound(num)</code>, <code>noteSound(soundList)</code>   
+#### 4.2.3 Function <code>buttonSound(num)</code>, <code>noteSound(soundList)</code>   
 These functions make sounds using note list(which is <code>scale</code> in <code>main.ipynb</code>   
 And buzzer makes sounds by changing frequency   
 
-#### 4.1.4 Function <code>rotateServo(num)</code>    
+#### 4.2.4 Function <code>rotateServo(num)</code>    
 This function makes servo rotate by certain degree by chaning duty cycle   
-
-## 5. Limitation   
-As time complexity is too high, when <code>main.ipynb</code> is implemented, it sometimes got _Time Out Error_   
-Though suspecting Raspberry Pi's performance, but I couldn't find out accurate reason why it fails when running   
 
 
 
