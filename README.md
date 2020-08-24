@@ -1,6 +1,5 @@
 # summer_projects_02
 Multiple Functions with Arduino and Raspberry Pi   
-![Group10](https://user-images.githubusercontent.com/63793178/91025487-6aa35b80-e634-11ea-9f69-0cfe171ac377.jpg){: width="10%" height="10%"}
 
 **ABSTRACT**
 
