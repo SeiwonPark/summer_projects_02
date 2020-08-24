@@ -7,8 +7,7 @@ This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 
 
 
 ## 1. Author   
-* Name: 박세원(Seiwon Park)
-* Student ID: 20153178
+* Name: 박세원(Seiwon Park)   
 
 ## 2. Version and Connect   
 * Version: Arduino 1.8.13, Raspberry Pi PL-App 1.0
