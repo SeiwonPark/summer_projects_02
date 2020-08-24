@@ -5,6 +5,12 @@ Multiple Functions with Arduino and Raspberry Pi
 
 This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 ~ 2020.08.13). In this project, I implemented Multiple Functions(Serial Communication, Sensing and Actuating) between Arduino and Raspberry Pi using Python, C/C++ to automate the circuit and to communicate. And in this process, I tried to control sensors and actuators only by Raspberry Pi. But what I've realized was that Raspberry Pi can't directly control Arduino's actuator but only can receive Serial values. So I regarded Raspberry Pi as an Actuator, and Arduino as a Sensor. The method that was implemented in this project was giving certain values that I set(like 999, 119 or 112) and take those values at a certain condition so that I can divide cases from which sensors gave Raspbery Pi those values.
 
+## Table of Contents   
+* [1.Author](#1.-author)   
+* [2.Version and Connect](#2.-version-and-connect)   
+
+
+
 
 ## 1. Author   
 * Name: 박세원(Seiwon Park)   
