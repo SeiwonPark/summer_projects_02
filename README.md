@@ -15,9 +15,9 @@ This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 
     + [4.1 Limitation](#41-limitation)   
     + [4.2 Execution and Functions](#42-execution-and-functions)   
         + [4.2.1 Overall Execution](#421-overall-execution)   
-        + [4.2.2 Function <code>toASCII(serialRead)</code>](#422-function-<code>toasciiserialread</code>)   
-        + [4.2.3 Function <code>buttonSound(num)</code>, <code>noteSound(soundList)</code>](#423-function-<code>buttonsoundnum</code>-<code>notesoundsoundlist</code>)   
-        + [4.2.4 Function <code>rotateServo(num)</code>](#424-function-<code>rotateservonum</code>)   
+        + [4.2.2 Function <code>toASCII(serialRead)</code>](#422-function-toasciiserialread)   
+        + [4.2.3 Function <code>buttonSound(num)</code>, <code>noteSound(soundList)</code>](#423-function-buttonsoundnum-notesoundsoundlist)   
+        + [4.2.4 Function <code>rotateServo(num)</code>](#424-function-rotateservonum)   
 
 ## 1. Author   
 * Name: 박세원(Seiwon Park)   
