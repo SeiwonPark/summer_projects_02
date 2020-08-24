@@ -1,7 +1,7 @@
 #include <Keypad.h>
  
-const byte ROWS = 4;    // 행(rows) 개수
-const byte COLS = 3;    // 열(columns) 개수
+const byte ROWS = 4;    // rows
+const byte COLS = 3;    // columns
 char keys[ROWS][COLS] = {
   {'1','2','3'},
   {'4','5','6'},
@@ -9,8 +9,8 @@ char keys[ROWS][COLS] = {
   {'*','0','#'}
 };
  
-byte rowPins[ROWS] = {6, 7, 8, 9};   // R1, R2, R3, R4 단자가 연결된 아두이노 핀 번호
-byte colPins[COLS] = {5, 4, 3};   // C1, C2, C3 단자가 연결된 아두이노 핀 번호
+byte rowPins[ROWS] = {6, 7, 8, 9}; // Arduino Pin number connected to R1, R2, R3, R4
+byte colPins[COLS] = {5, 4, 3};    // Arduino Pin number connected to C1, C2, C3
  
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
  
