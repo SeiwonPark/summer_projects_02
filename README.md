@@ -9,12 +9,15 @@ This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 
 * [1. Author](#1-author)   
 * [2. Version and Connect](#2-version-and-connect)   
 * [3. How to use](#3-how-to-use)   
-* [3.1 Run using <code>main.ipynb</code> in Jupyter Notebook by PL-App Launcher](#3.1-run-using-<code>main.ipynb</code>-in-jupyter-notebook-by-pl-app-launcher)   
-
-
-
-
-
+* [3.1 Run using <code>main.ipynb</code> in Jupyter Notebook by PL-App Launcher](#31-run-using-mainipynb-in-jupyter-notebook-by-pl-app-launcher)   
+* [3.1.1 Arduino serial communication test](#311-arduino-serial-communication-test)   
+* [4. How it works](#4-how-it-works)   
+* [4.1 Limitation](#41-limitation)   
+* [4.2 Execution and Functions](#42-execution-and-functions)   
+* [4.2.1 Overall Execution](#421-overall-execution)   
+* [4.2.2 Function <code>toASCII(serialRead)</code>](#422-function-<code>toASCII(serialRead)</code>)   
+* [4.2.3 Function <code>buttonSound(num)</code>, <code>noteSound(soundList)</code>](#423-function-<code>buttonsound(num)</code>,-<code>notesound(soundlist)</code>)   
+* [4.2.4 Function <code>rotateServo(num)</code>](#424-function-<code>rotateservo(num)</code>)   
 
 ## 1. Author   
 * Name: 박세원(Seiwon Park)   
