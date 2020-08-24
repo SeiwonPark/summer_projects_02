@@ -1,5 +1,4 @@
-#define vib_pin A1  // 진동하면 LOW, else HIGH
-                    // 아날로그 핀 A1에 진동 센서 연결
+#define vib_pin A1  // if vibrated: LOW, else: HIGH
 int led_pin=13;
 
 void setup() {
@@ -14,13 +13,13 @@ void loop() {
   if(val>500)
   {
     digitalWrite(led_pin, LOW);
-    Serial.println("NOT VIBRATE");
+    Serial.println("999");
     delay(1000);
    }
    else
    {
     digitalWrite(led_pin, HIGH);
-   Serial.println("VIBRATE");
+   Serial.println("112");
    delay(1000);
    }
 }
