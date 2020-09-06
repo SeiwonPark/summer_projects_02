@@ -52,66 +52,66 @@ Though suspecting Raspberry Pi's performance, but I couldn't find out accurate r
 #### 4.2.1 Overall Execution   
 Overall execution code is as follows:   
 ```python
-        while True:
-               try:
-                    while True:   
-                        try:
-                            tou = ser1.readline()       #    Touch Sensor
-                            pas = ser2.readline()       #    Password Button
-                            vib = ser3.readline()       #    Vibration Sensor
+    while True:
+           try:
+                while True:   
+                    try:
+                        tou = ser1.readline()       #    Touch Sensor
+                        pas = ser2.readline()       #    Password Button
+                        vib = ser3.readline()       #    Vibration Sensor
 
-                            if toASCII(tou[0]) and toASCII(vib[0]):       #  57 is the value that I set in Arduino 
-                                                                          #  which means 'normal state'
-                                print(999)                                #  999 is 'normal state' value that I set in Raspberry Pi
+                        if toASCII(tou[0]) and toASCII(vib[0]):       #  57 is the value that I set in Arduino 
+                                                                      #  which means 'normal state'
+                            print(999)                                #  999 is 'normal state' value that I set in Raspberry Pi
 
-                            if toASCII(pas[0]):
-                                print(999)
-                            else:
-                                print(int(pas[0]) - 48)
+                        if toASCII(pas[0]):
+                            print(999)
+                        else:
+                            print(int(pas[0]) - 48)
 
-                            if touch:
-                                if not toASCII(tou[0]) or not toASCII(vib[0]):  #  49 is the value that I set in Arduino
-                                                                                #  which means 'problem occured'
-                                                                                #  NOTE: regardless of the value, buzzer actuates automatically
-                                    print("        Problem Occurred !!!")
-                                    noteSound(beep)
-                                    break
-                            if not toASCII(tou[1]) and toASCII(tou[2]):
-                                print("        Fire Occurred !!!")
+                        if touch:
+                            if not toASCII(tou[0]) or not toASCII(vib[0]):  #  49 is the value that I set in Arduino
+                                                                            #  which means 'problem occured'
+                                                                            #  NOTE: regardless of the value, buzzer actuates automatically
+                                print("        Problem Occurred !!!")
                                 noteSound(beep)
                                 break
-
-                            if pas[0] != 0:
-
-                                num = int(pas[0]) - 48
-
-                                if int(pas[0]) == 42:                           #  when received '*', terminate input
-                                    buttonSound(num)
-
-                                    if password == test:                        #  password succeeded
-                                        touch = False                           # inactivate Touch Sensor
-                                        print("        The Safe Is Opened")
-                                        noteSound(dingdong)
-                                        rotateServo(7.5)                        #  servo rotates by 90 degree
-                                    else:                                       #  password failed
-                                        print("        Wrong !!!")
-                                        noteSound(error)
-                                        break
-
-                                elif 0 <= num and num <= 9:
-                                    num = int(pas[0]) - 48
-                                    buttonSound(num)
-                                    print("Num {} has been pressed".format(num))
-                                    test.append(num)
-
-                                elif int(pas[0]) == 35:                         #  when received '#', delete last input
-                                    buttonSound(num)
-                                    del test[-1]
-
-                        except KeyboardInterrupt:
+                        if not toASCII(tou[1]) and toASCII(tou[2]):
+                            print("        Fire Occurred !!!")
+                            noteSound(beep)
                             break
-               except KeyboardInterrupt:
-                    break
+
+                        if pas[0] != 0:
+
+                            num = int(pas[0]) - 48
+
+                            if int(pas[0]) == 42:                           #  when received '*', terminate input
+                                buttonSound(num)
+
+                                if password == test:                        #  password succeeded
+                                    touch = False                           # inactivate Touch Sensor
+                                    print("        The Safe Is Opened")
+                                    noteSound(dingdong)
+                                    rotateServo(7.5)                        #  servo rotates by 90 degree
+                                else:                                       #  password failed
+                                    print("        Wrong !!!")
+                                    noteSound(error)
+                                    break
+
+                            elif 0 <= num and num <= 9:
+                                num = int(pas[0]) - 48
+                                buttonSound(num)
+                                print("Num {} has been pressed".format(num))
+                                test.append(num)
+
+                            elif int(pas[0]) == 35:                         #  when received '#', delete last input
+                                buttonSound(num)
+                                del test[-1]
+
+                    except KeyboardInterrupt:
+                        break
+           except KeyboardInterrupt:
+                break
 ```   
 Arduino gives Serial value to the connected Raspberry Pi, and Raspberry Pi takes that value with <code>serial.Serial('Connected USB Route', 9600).readline()</code>. As return type is string(<code>.readline()</code>), I tried to find out the first letter Arduino is giving to Raspberry Pi(Like 9, 1). But, as it is string type, the first letter would be  a byte type. So I needed to convert it into int type just for convenience. In this moment, the byte type converts into int type and this value follows ASCII. Finally I could divide cases 'Touched', 'Fire detected', 'Password entered', 'Vibration detected'.   
    
