@@ -22,6 +22,7 @@ This project was created as a part of the 2020 IoT SMART DESIGN CAMP(2020.08.10 
         + [4.2.2 Function <code>toASCII(serialRead)</code>](#422-function-toasciiserialread)   
         + [4.2.3 Function <code>buttonSound(num)</code>, <code>noteSound(soundList)</code>](#423-function-buttonsoundnum-notesoundsoundlist)   
         + [4.2.4 Function <code>rotateServo(num)</code>](#424-function-rotateservonum)   
++ [5. Limitation](#5-limitation)   
 
 ## 1. Author   
 * Name: 박세원(Seiwon Park)   
@@ -131,7 +132,4 @@ And buzzer makes sounds by changing frequency
 #### 4.2.4 Function <code>rotateServo(num)</code>    
 This function makes servo rotate by certain degree by chaning duty cycle   
 
-
-
-
-        
+## 5. Limitation   
