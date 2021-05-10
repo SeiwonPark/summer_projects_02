@@ -1,6 +1,4 @@
-# summer_projects_02
-Multiple Functions with Arduino and Raspberry Pi   
-
+# smart-safe
 <br/>   
 
 <img width=300 src="https://github.com/SeiwonPark/summer_projects_02/blob/master/images/safe.jpeg">   
